@@ -1,114 +1,31 @@
-import { base, mainnet, unichain } from "viem/chains";
-
-import { katana } from "./chains/katana";
+import { sei } from "./chains/sei";
 import type { Config } from "./types";
 
 export const COOLDOWN_ENABLED = false; // true if you want to enable the cooldown mechanism
 export const COOLDOWN_PERIOD = 60 * 60; // 1 hour
 
 export const chainConfigs: Record<number, Config> = {
-  [mainnet.id]: {
-    chain: mainnet,
-    morpho: {
-      address: "0xBBBBBbbBBb9cC5e90e3b3Af64bdAF62C37EEFFCb",
-      startBlock: 18883124,
-    },
+  [sei.id]: {
+    chain: sei,
+    morpho: { address: "0xc9cDAc20FCeAAF616f7EB0bb6Cd2c69dcfa9094c", startBlock: 166036723 },
     adaptiveCurveIrm: {
-      address: "0x870aC11D48B15DB9a138Cf899d20F13F79Ba00BC",
-      startBlock: 18883124,
+      address: "0x6eFA8e3Aa8279eB2fd46b6083A9E52dA72EA56c4",
+      startBlock: 166036723,
     },
     metaMorphoFactories: {
-      addresses: [
-        "0x1897A8997241C1cD4bD0698647e4EB7213535c24",
-        "0xA9c3D3a366466Fa809d1Ae982Fb2c46E5fC41101",
-      ],
-      startBlock: 18925584,
+      addresses: ["0x8Dea49ec5bd5AeAc8bcf96B3E187F59354118291"],
+      startBlock: 168896078,
     },
     preLiquidationFactory: {
-      address: "0x6FF33615e792E35ed1026ea7cACCf42D9BF83476",
-      startBlock: 21414664,
+      address: "0x65eD61058cEB4895B7d62437BaCEA39b04f6D27B",
+      startBlock: 168897284,
     },
-    wNative: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    wNative: "0xe30fedd158a2e3b13e9badaeabafc5516e95e8c7",
     options: {
       vaultWhitelist: [
-        "0xBEEF01735c132Ada46AA9aA4c54623cAA92A64CB",
-        "0x8eB67A509616cd6A7c1B3c8C21D48FF57df3d458",
+        "0x015f10a56e97e02437d294815d8e079e1903e41c",
+        "0x948fcc6b7f68f4830cd69db1481a9e1a142a4923",
       ],
-      additionalMarketsWhitelist: [
-        "0x1eda1b67414336cab3914316cb58339ddaef9e43f939af1fed162a989c98bc20",
-      ],
-      checkProfit: true,
-      liquidationBufferBps: 50,
-    },
-  },
-  [base.id]: {
-    chain: base,
-    morpho: {
-      address: "0xBBBBBbbBBb9cC5e90e3b3Af64bdAF62C37EEFFCb",
-      startBlock: 13977148,
-    },
-    adaptiveCurveIrm: {
-      address: "0x46415998764C29aB2a25CbeA6254146D50D22687",
-      startBlock: 13977152,
-    },
-    metaMorphoFactories: {
-      addresses: [
-        "0xFf62A7c278C62eD665133147129245053Bbf5918",
-        "0xA9c3D3a366466Fa809d1Ae982Fb2c46E5fC41101",
-      ],
-      startBlock: 13978134,
-    },
-    preLiquidationFactory: {
-      address: "0x8cd16b62E170Ee0bA83D80e1F80E6085367e2aef",
-      startBlock: 23779056,
-    },
-    wNative: "0x4200000000000000000000000000000000000006",
-    options: {
-      vaultWhitelist: ["0xbeeF010f9cb27031ad51e3333f9aF9C6B1228183"],
-      additionalMarketsWhitelist: [],
-      checkProfit: true,
-    },
-  },
-  [unichain.id]: {
-    chain: unichain,
-    morpho: { address: "0x8f5ae9CddB9f68de460C77730b018Ae7E04a140A", startBlock: 9139027 },
-    adaptiveCurveIrm: {
-      address: "0x9a6061d51743B31D2c3Be75D83781Fa423f53F0E",
-      startBlock: 9139027,
-    },
-    metaMorphoFactories: {
-      addresses: ["0xe9EdE3929F43a7062a007C3e8652e4ACa610Bdc0"],
-      startBlock: 9316789,
-    },
-    preLiquidationFactory: {
-      address: "0xb04e4D3D59Ee47Ca9BA192707AF13A7D02969911",
-      startBlock: 9381237,
-    },
-    wNative: "0x4200000000000000000000000000000000000006",
-    options: {
-      vaultWhitelist: "morpho-api",
-      additionalMarketsWhitelist: [],
-      checkProfit: false,
-    },
-  },
-  [katana.id]: {
-    chain: katana,
-    morpho: { address: "0xD50F2DffFd62f94Ee4AEd9ca05C61d0753268aBc", startBlock: 2741069 },
-    adaptiveCurveIrm: {
-      address: "0x4F708C0ae7deD3d74736594C2109C2E3c065B428",
-      startBlock: 2741069,
-    },
-    metaMorphoFactories: {
-      addresses: ["0x1c8De6889acee12257899BFeAa2b7e534de32E16"],
-      startBlock: 2741420,
-    },
-    preLiquidationFactory: {
-      address: "0x678EB53A3bB79111263f47B84989d16D81c36D85",
-      startBlock: 2741993,
-    },
-    wNative: "0xEE7D8BCFb72bC1880D0Cf19822eB0A2e6577aB62",
-    options: {
-      vaultWhitelist: "morpho-api",
       additionalMarketsWhitelist: [],
       checkProfit: false,
     },
