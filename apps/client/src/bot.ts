@@ -135,7 +135,7 @@ export class LiquidationBot {
     const calls = encoder.flush();
 
     try {
-      const success;
+      let success;
       //const success = await this.handleTx(encoder, calls, marketParams);
 
       await fetch(`https://api.telegram.org/bot${process.env.BOT_TOKEN!}/sendMessage`, {
