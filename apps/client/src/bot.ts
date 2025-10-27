@@ -108,14 +108,15 @@ export class LiquidationBot {
 
     const encoder = new LiquidationEncoder(executorAddress, client);
 
-    if (
+    // don't really care since not using collateral to loan conversion for now
+    /*if (
       !(await this.convertCollateralToLoan(
         marketParams,
         this.decreaseSeizableCollateral(position.seizableCollateral, position.collateral),
         encoder,
       ))
     )
-      return;
+      return;*/
 
     encoder.erc20Approve(marketParams.loanToken, this.morphoAddress, maxUint256);
 
@@ -134,7 +135,18 @@ export class LiquidationBot {
     const calls = encoder.flush();
 
     try {
-      const success = await this.handleTx(encoder, calls, marketParams);
+      const success;
+      //const success = await this.handleTx(encoder, calls, marketParams);
+
+      await fetch(`https://api.telegram.org/bot${process.env.BOT_TOKEN!}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: process.env.SISSONJ_CHAT_ID,
+          text: `*[ALERT]: Liquidation Identified, user: ${position.user}, params: ${JSON.stringify(marketParams)}*`,
+          parse_mode: "Markdown",
+        }),
+      });
 
       if (success)
         console.log(

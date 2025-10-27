@@ -41,7 +41,7 @@ async function isPonderReady(apiUrl: string) {
 async function waitForIndexing(apiUrl: string) {
   while (!(await isPonderReady(apiUrl))) {
     console.log("⏳ Ponder is indexing");
-    await sleep(1000);
+    await sleep(100000);
   }
 }
 
