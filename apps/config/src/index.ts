@@ -1,3 +1,5 @@
+import { execSync } from "child_process";
+
 import dotenv from "dotenv";
 import type { Address, Chain, Hex } from "viem";
 
@@ -30,10 +32,16 @@ export function chainConfig(chainId: number): ChainConfig {
   };
 }
 
-export function getSecrets(chainId: number, chain?: Chain) {
+export async function getSecrets(chainId: number, chain?: Chain) {
   const defaultRpcUrl = chain?.rpcUrls.default.http[0];
 
-  const rpcUrl = process.env[`RPC_URL_${chainId}`] ?? defaultRpcUrl;
+  const restartsRaw = execSync("systemctl show -p NRestarts ponder.service");
+  const restartsParsed = restartsRaw.toString().split("=")[1]?.trim();
+  const restarts = parseInt(restartsParsed ?? "0");
+  const rpcArray = process.env[`RPC_URLS_${chainId}`]?.split(",") ?? [];
+  const rpcIndex = restarts % rpcArray.length;
+
+  const rpcUrl = rpcArray[rpcIndex] ?? defaultRpcUrl;
   const executorAddress = process.env[`EXECUTOR_ADDRESS_${chainId}`];
   const liquidationPrivateKey = process.env[`LIQUIDATION_PRIVATE_KEY_${chainId}`];
 
